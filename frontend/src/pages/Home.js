@@ -6,11 +6,10 @@ const Home = () =>{
         <div>
             <div style={{
                 position: "absolute",
-                top: 0,
+                top: 15,
                 left: 0,
                 backgroundColor: "transparent",
                 width: "100%",
-                padding: "15px",
                 display: "flex",
                 justifyContent: "flex-start",
             }}>
