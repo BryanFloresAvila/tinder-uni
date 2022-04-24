@@ -22,6 +22,35 @@ const register = (req, res) => {
       res.status(400).json(err);
     });
 };
+
+const verifyUser = (req, res) => {
+  const { confirmationCode} = req.params;
+  users.findOne({confirmationCode})
+    .then((user) => {
+      if (user) {
+        res.send({
+          message: 'User was verified successfully!',
+        });
+        user.confirmationStatus = true;
+        user.save((err) => {
+          if (err) {
+            res.status(500).send({ message: err });
+            return;
+          }
+        });
+      } else {
+        res.status(400).json({
+          message: 'User was not verified!',
+        });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(400).json(err);
+    });
+}
+
+
 const login = (req, res) => {};
 
-module.exports = { register, login };
+module.exports = { register, login, verifyUser };
