@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { StyledIcon, StyledLabel, StyledTextInput } from "./Styles";
-import { useField } from "formik";
+import { StyledIcon, StyledLabel, StyledTextInput, ErrorMsg } from "./Styles";
+import { ErrorMessage, useField } from "formik";
 import {FiEyeOff, FiEye} from 'react-icons/fi';
 
 export const TextInput = ({icon, ...props}) => {
@@ -23,6 +23,11 @@ export const TextInput = ({icon, ...props}) => {
                     {show && <FiEye></FiEye>}
                     {!show && <FiEyeOff></FiEyeOff>}
                 </StyledIcon>
+            )}
+            {meta.touched && meta.error ? (
+                <ErrorMessage>{meta.error}</ErrorMessage>
+            ) : (
+                <ErrorMessage style = {{visibility : "hidden"}}>.</ErrorMessage>
             )}
         </div>
     )
